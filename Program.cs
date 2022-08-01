@@ -1,14 +1,10 @@
-﻿
-
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Please neter Card number:");
+﻿Console.WriteLine("Please enter Card number:");
 var userInput = Console.ReadLine();
 long card = (long)Convert.ToDouble(userInput);
 long[] cardNumber = GetNumberArr(card);
-
 int digitCount = cardNumber.Length;
 bool result = VerifyCardNumber(digitCount, cardNumber); //call to Luhn's algo
-
+//if card verified, check the card type
 if (result)
 {
     Console.WriteLine(DefineCard(cardNumber, digitCount));
@@ -60,6 +56,7 @@ long[] GetNumberArr(long card) //this returns the card number in reverse sequenc
 
 string DefineCard(long[] card, int digits)
 {
+    //first two digits are lastone*10 + prelast (the array is reverse of the userinput provided!)
     var firstDigits = card[digits - 1] * 10 + card[digits - 2];
     if (digits == 15 && (firstDigits == 37 || firstDigits == 34))
     {
